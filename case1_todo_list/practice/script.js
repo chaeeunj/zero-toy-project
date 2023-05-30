@@ -5,7 +5,7 @@
     return document.querySelector(target);
   };
 
-  const API_URL = 'http://localhost:3000/todos';
+  const API_URL = `http://localhost:3000/todos`;
   const $todos = get('.todos');
   const $form = get('.todo_form');
   const $todoInput = get('.todo_input');
@@ -60,7 +60,7 @@
       .then((todos) => {
         renderAllTodos(todos);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error.message));
   };
 
   const addTodo = (e) => {
@@ -140,7 +140,18 @@
       header: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content }),
     })
-      .then((response) => response.json())
+      .then(getTodos)
+      .catch((error) => console.error(error));
+  };
+
+  const removeTodo = (e) => {
+    if (e.target.className !== 'todo_remove_button') return;
+    const $item = e.target.closest('.item');
+    const id = $item.dataset.id;
+
+    fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+    })
       .then(getTodos)
       .catch((error) => console.error(error));
   };
@@ -153,6 +164,7 @@
     $todos.addEventListener('click', toggleTodo);
     $todos.addEventListener('click', changeEditMode);
     $todos.addEventListener('click', editTodo);
+    $todos.addEventListener('click', removeTodo);
   };
   init();
 })();

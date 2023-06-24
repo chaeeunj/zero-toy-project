@@ -6,18 +6,35 @@
   }
 
   class Carousel {
-    constructor(caruoselElement) {
-      this.caruoselElement = caruoselElement
+    constructor(carouselElement) {
+      this.carouselElement = carouselElement
       this.itemClassName = 'carousel_item'
-      this.items = this.caruoselElement.querySelectorAll('.carousel_item')
-      this.totalItems = this.items.length
+      this.items = this.carouselElement.querySelectorAll('.carousel_item')
+
+      this.totalItems = this.items.length // 5
       this.current = 0
     }
 
     initCarousel() {
-      this.items[this.totalItems - 1].classList.add('prev')
       this.items[0].classList.add('active')
       this.items[1].classList.add('next')
+      this.items[this.totalItems - 1].classList.add('prev')
+    }
+
+    setEventListener() {
+      this.prevButton = this.carouselElement.querySelector(
+        '.carousel_button--prev'
+      )
+      this.nextButton = this.carouselElement.querySelector(
+        '.carousel_button--next'
+      )
+
+      this.prevButton.addEventListener('click', () => {
+        this.movePrev()
+      })
+      this.nextButton.addEventListener('click', () => {
+        this.moveNext()
+      })
     }
 
     moveCarouselTo() {
@@ -43,15 +60,6 @@
       }
     }
 
-    movePrev() {
-      if (this.current === 0) {
-        this.current = this.totalItems - 1
-      } else {
-        this.current--
-      }
-      this.moveCarouselTo()
-    }
-
     moveNext() {
       if (this.current === this.totalItems - 1) {
         this.current = 0
@@ -61,27 +69,21 @@
       this.moveCarouselTo()
     }
 
-    setEventListeners() {
-      this.prevButton = this.caruoselElement.querySelector(
-        '.carousel_button--prev'
-      )
-      this.nextButton = this.caruoselElement.querySelector(
-        '.carousel_button--next'
-      )
-
-      this.prevButton.addEventListener('click', () => {
-        this.movePrev()
-      })
-      this.nextButton.addEventListener('click', () => {
-        this.moveNext()
-      })
+    movePrev() {
+      if (this.current === 0) {
+        this.current = this.totalItems - 1
+      } else {
+        this.current--
+      }
+      this.moveCarouselTo()
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     const carouselElement = get('.carousel')
     const carousel = new Carousel(carouselElement)
+
     carousel.initCarousel()
-    carousel.setEventListeners()
+    carousel.setEventListener()
   })
 })()

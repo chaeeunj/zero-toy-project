@@ -25,7 +25,7 @@
             autocomplete="off"
           />
           <label for="search">
-            <a href="#none">
+            <a href="#none" class="btn_search">
               <svg
                 viewBox="0 0 24 24"
                 preserveAspectRatio="xMidYMid meet"
@@ -149,6 +149,44 @@
                 <span>3.8M views, 18 days ago</span>
               </span>
             </figcaption>
+          </figure>
+        </div>
+        <div class="contents view">
+          <figure>
+            <video autoplay>
+              <source src="./assets/sample.mp4" type="video/mp4" />
+            </video>
+            <figcaption>
+              <span class="description"
+                ><strong
+                  >The harder you work, the more likely you can reach the
+                  goal</strong
+                >
+              </span>
+            </figcaption>
+            <span class="controls">
+              <progress
+                min="0"
+                max="100"
+                value="0"
+                class="js-progress"
+              ></progress>
+              <button type="button" class="js-replay">Replay</button>
+              <button type="button" class="js-play">Play</button>
+              <button type="button" class="js-stop">Stop</button>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value="1"
+                class="js-volume"
+              />
+              <button type="button" class="js-mute">Mute</button>
+              <button type="button" class="js-fullScreen" accesskey="T">
+                FullScreen
+              </button>
+            </span>
           </figure>
         </div>
       </section>

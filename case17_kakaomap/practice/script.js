@@ -31,6 +31,13 @@
     return document.querySelector(target)
   }
 
+  const $map = get('#map')
+
+  const mapContainer = new kakao.maps.Map($map, {
+    center: new kakao.maps.LatLng(defaultPos.lat, defaultPos.lng),
+    level: 3,
+  })
+
   const init = () => {}
 
   init()

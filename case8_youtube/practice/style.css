@@ -112,10 +112,6 @@ section {
   display: flex;
 }
 
-.contents.view {
-  display: flex;
-}
-
 .contents.view figure {
   flex: 0 0 50%;
   margin: 0;

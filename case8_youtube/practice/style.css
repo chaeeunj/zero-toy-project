@@ -109,6 +109,10 @@ section {
 }
 
 .contents.list {
+  display: none;
+}
+
+.contents.view {
   display: flex;
 }
 

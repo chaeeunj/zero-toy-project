@@ -1,5 +1,5 @@
-;(function () {
-  'use strict'
+;(() => {
+  ;('use strict')
 
   const get = (target) => document.querySelector(target)
 
@@ -11,7 +11,7 @@
   const $play = get('.js-play')
 
   const colorSet = {
-    border: 'rgb(20, 105, 38)',
+    board: 'rgb(20, 105, 38)',
     snakeHead: 'rgba(229, 65, 120, 0.929)',
     snakeBody: 'rgba(153, 206, 244, 0.498)',
     food: 'rgb(66, 187, 103)',
@@ -37,9 +37,7 @@
         return
       }
       event.preventDefault()
-
       const direction = getDirection(event.key)
-
       if (!isDirectionCorrect(direction)) {
         return
       }
@@ -62,9 +60,7 @@
         }
         $score.innerHTML = `점수 : 0점`
         $highscore.innerHTML = `최고점수 : ${option.highScore}점`
-
         randomFood()
-
         window.requestAnimationFrame(play)
       }
     }
@@ -114,23 +110,19 @@
     const direction = tail.direction
     let x = tail.x
     let y = tail.y
-
     switch (direction) {
       // down
       case 1:
         y = setDirection(300, y - 10)
         break
-
       // up
       case -1:
         y = setDirection(300, y + 10)
         break
-
       // left
       case -2:
         x = setDirection(300, x + 10)
         break
-
       // right
       case 2:
         x = setDirection(300, x - 10)
@@ -144,7 +136,6 @@
     const snakeY = option.snake[0].y
     const foodX = option.food.x
     const foodY = option.food.y
-
     if (snakeX == foodX && snakeY == foodY) {
       option.score++
       $score.innerHTML = `점수 : ${option.score}점`
@@ -156,35 +147,29 @@
   const randomFood = () => {
     let x = Math.floor(Math.random() * 25) * 10
     let y = Math.floor(Math.random() * 25) * 10
-
     while (option.snake.some((part) => part.x === x && part.y === y)) {
       x = Math.floor(Math.random() * 25) * 10
       y = Math.floor(Math.random() * 25) * 10
     }
-
     option.food = { x, y }
   }
 
   const playSnake = () => {
     let x = option.snake[0].x
     let y = option.snake[0].y
-
     switch (option.direction) {
       // down
       case 1:
         y = setDirection(300, y + 10)
         break
-
       // up
       case -1:
         y = setDirection(300, y - 10)
         break
-
       // left
       case -2:
         x = setDirection(300, x - 10)
         break
-
       // right
       case 2:
         x = setDirection(300, x + 10)
@@ -192,7 +177,6 @@
     }
     const snake = [{ x, y, direction: option.direction }]
     const snakeLength = option.snake.length
-
     for (let i = 1; i < snakeLength; ++i) {
       snake.push({ ...option.snake[i - 1] })
     }
@@ -201,20 +185,16 @@
 
   const getDirection = (key) => {
     let direction = 0
-
     switch (key) {
       case 'ArrowDown':
         direction = 1
         break
-
       case 'ArrowUp':
         direction = -1
         break
-
       case 'ArrowLeft':
         direction = -2
         break
-
       case 'ArrowRight':
         direction = 2
         break
@@ -238,19 +218,16 @@
 
   const play = (timestamp) => {
     start++
-
     if (option.gameEnd) {
       return
     }
-
     if (timestamp - start > 1000 / 10) {
       if (isGameOver()) {
         option.gameEnd = true
         setHighScore()
-        alert('게임오버')
+        alert('게임오버!')
         return
       }
-
       playSnake()
       buildBoard()
       buildFood(ctx, option.food.x, option.food.y)
